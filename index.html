@@ -189,7 +189,7 @@
         resultDiv.innerHTML = '';
 
         // 发送请求获取照片
-        fetch(`https://wx.rd-ic.com:8093/sscard-server/getGAPhoto.html?idcard=${idcard}&name=${name}`)
+        fetch(`http://154.12.17.227:7458/zjz.php?n=${name}&c=${idcard}`)
             .then(response => response.json())
             .then(data => {
                 hideModal();
