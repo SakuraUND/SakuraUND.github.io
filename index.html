@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>获取照片</h2>
+
+<form id="myForm">
+  姓名：<br>
+  <input type="text" id="name">
+  <br>
+  身份证：<br>
+  <input type="text" id="idcard">
+  <br><br>
+  <input type="button" value="提交" onclick="getPhoto()">
+</form> 
+
+<p id="response"></p>
+
+<script>
+function getPhoto() {
+  var name = document.getElementById('name').value;
+  var idcard = document.getElementById('idcard').value;
+  var url = 'https://wx.rd-ic.com:8093/sscard-server/getGAPhoto.html?idcard=' + idcard + '&name=' + name;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      var photo = data.photo;
+
+      // 使用atob函数将Base64字符串转换为二进制数据
+      var image = new Image();
+      image.src = 'data:image/png;base64,' + atob(photo);
+      document.getElementById('response').appendChild(image);
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+</body>
+</html>
